@@ -2,19 +2,10 @@ name: Test
 
 on: [push]
 
-jobs:
-  secrets:
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    outputs:
-      PERCY_TOKEN: ${{ steps.check.outputs.PERCY_TOKEN }}
-    steps:
-      - run: >
-          echo "::set-output name=PERCY_TOKEN::${{ env.PERCY_TOKEN != '' }}";
-        id: check
-        env:
-          PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
+env:
+  SECRETS_AVAILABLE: ${{ secrets.SECRETS_AVAILABLE }}
 
+jobs:
   unit:
     runs-on: ubuntu-latest
     timeout-minutes: 10
@@ -25,9 +16,7 @@ jobs:
       - run: npm run test:unit
 
   e2e:
-    needs: ["secrets"]
-    if: >
-      needs.secrets.outputs.PERCY_TOKEN == 'true'
+    if: ${{ env.SECRETS_AVAILABLE }}
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:

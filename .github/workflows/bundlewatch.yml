@@ -2,24 +2,13 @@ name: Bundlewatch
 
 on: [push]
 
-jobs:
-  secrets:
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    outputs:
-      BUNDLEWATCH_GITHUB_TOKEN: ${{ steps.check.outputs.BUNDLEWATCH_GITHUB_TOKEN }}
-    steps:
-      - run: >
-          echo "::set-output name=BUNDLEWATCH_GITHUB_TOKEN::${{ env.BUNDLEWATCH_GITHUB_TOKEN != '' }}";
-        id: check
-        env:
-          BUNDLEWATCH_GITHUB_TOKEN: ${{ secrets.BUNDLEWATCH_GITHUB_TOKEN }}
+env:
+  SECRETS_AVAILABLE: ${{ secrets.SECRETS_AVAILABLE }}
 
-  bundlewatch:
-    needs: ["secrets"]
-    if: >
-      needs.secrets.outputs.BUNDLEWATCH_GITHUB_TOKEN == 'true'
+jobs:
+  upload:
     runs-on: ubuntu-latest
+    if: ${{ env.SECRETS_AVAILABLE }}
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v2

@@ -2,27 +2,12 @@ name: Chromatic
 
 on: [push]
 
-jobs:
-  secrets:
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    outputs:
-      GITHUB_TOKEN: ${{ steps.check.outputs.GITHUB_TOKEN }}
-      CHROMATIC_PROJECT_TOKEN: ${{ steps.check.outputs.CHROMATIC_PROJECT_TOKEN }}
-    steps:
-      - run: >
-          echo "::set-output name=GITHUB_TOKEN::${{ env.GITHUB_TOKEN != '' }}";
-          echo "::set-output name=CHROMATIC_PROJECT_TOKEN::${{ env.CHROMATIC_PROJECT_TOKEN != '' }}";
-        id: check
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+env:
+  SECRETS_AVAILABLE: ${{ secrets.SECRETS_AVAILABLE }}
 
+jobs:
   deploy:
-    needs: ["secrets"]
-    if: >
-      needs.secrets.outputs.CHROMATIC_PROJECT_TOKEN == 'true' &&
-      needs.secrets.outputs.GITHUB_TOKEN == 'true'
+    if: ${{ env.SECRETS_AVAILABLE }}
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:

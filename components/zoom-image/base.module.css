@@ -1,0 +1,4 @@
+.base {
+  --transitionDuration: 300ms;
+  --transitionTimingFunction: ease-in-out;
+}

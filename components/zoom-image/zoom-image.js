@@ -34,14 +34,14 @@ export default function ZoomImage({ alt, height, margin, src, width }) {
 
   return (
     <Base ref={baseRef}>
-      <Background zoomed={zoomed} />
-      <Toggle isPressed={zoomed} onPress={toggleZoom}>
-        <Foreground
-          getBaseRect={getBaseRect}
-          margin={margin}
-          setZoomedSize={setZoomedSize}
-          zoomed={zoomed}
-        >
+      <Background onPress={unzoom} zoomed={zoomed} />
+      <Foreground
+        getBaseRect={getBaseRect}
+        margin={margin}
+        setZoomedSize={setZoomedSize}
+        zoomed={zoomed}
+      >
+        <Toggle isPressed={zoomed} onPress={toggleZoom}>
           <BoxShadow>
             <ResponsiveImage
               alt={alt}
@@ -51,8 +51,8 @@ export default function ZoomImage({ alt, height, margin, src, width }) {
               width={width}
             />
           </BoxShadow>
-        </Foreground>
-      </Toggle>
+        </Toggle>
+      </Foreground>
     </Base>
   );
 }

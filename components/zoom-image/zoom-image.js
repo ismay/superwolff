@@ -6,7 +6,6 @@ import ResponsiveImage from "../responsive-image";
 import Background from "./background";
 import Base from "./base";
 import Foreground from "./foreground";
-import Toggle from "./toggle";
 import useWindowListener from "./window-listener";
 
 export default function ZoomImage({ alt, height, margin, src, width }) {
@@ -38,20 +37,19 @@ export default function ZoomImage({ alt, height, margin, src, width }) {
       <Foreground
         getBaseRect={getBaseRect}
         margin={margin}
+        onPress={toggleZoom}
         setZoomedSize={setZoomedSize}
         zoomed={zoomed}
       >
-        <Toggle isPressed={zoomed} onPress={toggleZoom}>
-          <BoxShadow>
-            <ResponsiveImage
-              alt={alt}
-              height={height}
-              sizes={zoomedSize}
-              src={src}
-              width={width}
-            />
-          </BoxShadow>
-        </Toggle>
+        <BoxShadow>
+          <ResponsiveImage
+            alt={alt}
+            height={height}
+            sizes={zoomedSize}
+            src={src}
+            width={width}
+          />
+        </BoxShadow>
       </Foreground>
     </Base>
   );

@@ -5,11 +5,13 @@ import T from "prop-types";
 import { useRef, useState } from "react";
 import { calculateScale, calculateX, calculateY } from "./calculate";
 import s from "./foreground.module.css";
+import Toggle from "./toggle";
 
 const Foreground = ({
   children,
   getBaseRect,
   margin,
+  onPress,
   setZoomedSize,
   zoomed,
 }) => {
@@ -87,7 +89,9 @@ const Foreground = ({
       onTransitionEnd={handleTransitionEnd}
       style={style}
     >
-      {children}
+      <Toggle isPressed={zoomed} onPress={onPress}>
+        {children}
+      </Toggle>
     </div>
   );
 };
@@ -96,6 +100,7 @@ Foreground.propTypes = {
   children: T.node.isRequired,
   getBaseRect: T.func.isRequired,
   margin: T.number.isRequired,
+  onPress: T.func.isRequired,
   setZoomedSize: T.func.isRequired,
   zoomed: T.bool.isRequired,
 };

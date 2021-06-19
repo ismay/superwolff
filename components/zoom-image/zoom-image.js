@@ -1,16 +1,15 @@
+import Image from "@graphcms/react-image";
 import { useDebounceCallback } from "@react-hook/debounce";
 import T from "prop-types";
 import { useRef, useState } from "react";
 import BoxShadow from "../box-shadow";
-import ResponsiveImage from "../responsive-image";
 import Background from "./background";
 import Foreground from "./foreground";
 import useWindowListener from "./window-listener";
 
-export default function ZoomImage({ alt, height, margin, src, width }) {
+export default function ZoomImage({ handle, height, margin, title, width }) {
   const baseRef = useRef(null);
   const [zoomed, setZoomed] = useState(false);
-  const [zoomedSize, setZoomedSize] = useState(0);
   const style = {
     "--transitionDuration": "300ms",
     "--transitionTimingFunction": "ease-in-out",
@@ -71,19 +70,16 @@ export default function ZoomImage({ alt, height, margin, src, width }) {
       tabIndex="0"
     >
       <Background zoomed={zoomed} />
-      <Foreground
-        getBaseRect={getBaseRect}
-        margin={margin}
-        setZoomedSize={setZoomedSize}
-        zoomed={zoomed}
-      >
+      <Foreground getBaseRect={getBaseRect} margin={margin} zoomed={zoomed}>
         <BoxShadow>
-          <ResponsiveImage
-            alt={alt}
-            height={height}
-            sizes={zoomedSize}
-            src={src}
-            width={width}
+          <Image
+            alt={title}
+            image={{
+              handle,
+              height,
+              width,
+            }}
+            title={title}
           />
         </BoxShadow>
       </Foreground>
@@ -96,9 +92,9 @@ ZoomImage.defaultProps = {
 };
 
 ZoomImage.propTypes = {
-  alt: T.string.isRequired,
+  handle: T.string.isRequired,
   height: T.number.isRequired,
   margin: T.number,
-  src: T.string.isRequired,
+  title: T.string.isRequired,
   width: T.number.isRequired,
 };

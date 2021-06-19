@@ -22,10 +22,10 @@ export default function Work({ work }) {
           {work.images.map((image) => (
             <Cell key={image.id} columns={3}>
               <ZoomImage
-                alt={work.title}
+                handle={image.handle}
                 height={image.height}
                 margin={25}
-                src={image.url}
+                title={work.title}
                 width={image.width}
               />
             </Cell>
@@ -63,9 +63,9 @@ Work.propTypes = {
     dimensions: T.string,
     images: T.arrayOf(
       T.shape({
+        handle: T.string.isRequired,
         height: T.number.isRequired,
         id: T.string.isRequired,
-        url: T.string.isRequired,
         width: T.number.isRequired,
       })
     ).isRequired,
@@ -110,7 +110,7 @@ export async function getStaticProps({ params }) {
           dimensions
           images {
             id
-            url
+            handle
             height
             width
           }

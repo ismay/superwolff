@@ -1,3 +1,4 @@
+import Image from "@graphcms/react-image";
 import { gql } from "graphql-request";
 import Head from "next/head";
 import T from "prop-types";
@@ -5,7 +6,6 @@ import client from "../client";
 import BoxShadow from "../components/box-shadow";
 import Details from "../components/details";
 import { Cell, Grid } from "../components/grid";
-import ResponsiveImage from "../components/responsive-image";
 import UndecoratedLink from "../components/undecorated-link";
 
 export default function Home({ works }) {
@@ -23,11 +23,14 @@ export default function Home({ works }) {
           <Cell key={work.id} columns={2}>
             <UndecoratedLink href={`/work/${work.slug}`} title={work.title}>
               <BoxShadow>
-                <ResponsiveImage
+                <Image
                   alt={work.title}
-                  height={work.thumbnail.height}
-                  src={work.thumbnail.url}
-                  width={work.thumbnail.width}
+                  image={{
+                    handle: work.thumbnail.handle,
+                    height: work.thumbnail.height,
+                    width: work.thumbnail.width,
+                  }}
+                  title={work.title}
                 />
               </BoxShadow>
               <Details date={work.releasedAt} title={work.title} />
@@ -46,8 +49,8 @@ Home.propTypes = {
       releasedAt: T.string.isRequired,
       slug: T.string.isRequired,
       thumbnail: T.shape({
+        handle: T.string.isRequired,
         height: T.number.isRequired,
-        url: T.string.isRequired,
         width: T.number.isRequired,
       }).isRequired,
       title: T.string.isRequired,
@@ -64,7 +67,7 @@ export async function getStaticProps() {
         slug
         releasedAt
         thumbnail {
-          url
+          handle
           width
           height
         }

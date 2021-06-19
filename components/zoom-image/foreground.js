@@ -6,13 +6,7 @@ import { useRef, useState } from "react";
 import { calculateScale, calculateX, calculateY } from "./calculate";
 import s from "./foreground.module.css";
 
-const Foreground = ({
-  children,
-  getBaseRect,
-  margin,
-  setZoomedSize,
-  zoomed,
-}) => {
+const Foreground = ({ children, getBaseRect, margin, zoomed }) => {
   const foregroundRef = useRef(null);
   const prevZoomed = usePrevious(zoomed);
   const [isUnzooming, setIsUnzooming] = useState(false);
@@ -55,18 +49,11 @@ const Foreground = ({
   }, [prevZoomed, zoomed, getBaseRect, margin]);
 
   /**
-   * Handle post-animation updates
+   * Handle post-animation update
    */
 
   const handleTransitionEnd = () => {
-    if (zoomed) {
-      if (!foregroundRef.current) {
-        return;
-      }
-
-      const rect = foregroundRef.current.getBoundingClientRect();
-      setZoomedSize(rect.width);
-    } else {
+    if (!zoomed) {
       setIsUnzooming(false);
     }
   };
@@ -96,7 +83,6 @@ Foreground.propTypes = {
   children: T.node.isRequired,
   getBaseRect: T.func.isRequired,
   margin: T.number.isRequired,
-  setZoomedSize: T.func.isRequired,
   zoomed: T.bool.isRequired,
 };
 

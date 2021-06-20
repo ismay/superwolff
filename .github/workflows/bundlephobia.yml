@@ -1,0 +1,19 @@
+name: Bundlephobia
+
+on: [push]
+
+concurrency:
+  group: ${{ github.workflow}}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    if: github.repository_owner == 'ismay' && github.actor != 'dependabot[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v1
+      - uses: carlesnunez/check-my-bundlephobia@v1.8.0
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          ignore-dev-dependencies: true

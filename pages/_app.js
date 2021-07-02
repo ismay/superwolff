@@ -3,6 +3,7 @@
 import "../styles/globals.css";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { OverlayProvider } from "@react-aria/overlays";
 import Header from "../components/header";
 import LoadingIndicator from "../components/loading-indicator";
 import Main from "../components/main";
@@ -36,12 +37,14 @@ export default function CustomApp({ Component, pageProps }) {
   });
 
   return (
-    <Page>
-      <Header />
-      <Main>
-        <Component {...pageProps} />
-      </Main>
-      <LoadingIndicator isLoading={isLoading} />
-    </Page>
+    <OverlayProvider>
+      <Page>
+        <Header />
+        <Main>
+          <Component {...pageProps} />
+        </Main>
+        <LoadingIndicator isLoading={isLoading} />
+      </Page>
+    </OverlayProvider>
   );
 }

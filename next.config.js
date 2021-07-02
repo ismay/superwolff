@@ -1,5 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 
+const { withSentryConfig } = require("@sentry/nextjs");
 const { RelativeCiAgentWebpackPlugin } = require("@relative-ci/agent");
 
 const webpack = (config, options) => {
@@ -16,10 +17,17 @@ const webpack = (config, options) => {
   return config;
 };
 
-module.exports = {
-  images: {
-    domains: ["media.graphcms.com"],
-  },
-  reactStrictMode: true,
-  webpack,
+const SentryWebpackPluginOptions = {
+  silent: true,
 };
+
+module.exports = withSentryConfig(
+  {
+    images: {
+      domains: ["media.graphcms.com"],
+    },
+    reactStrictMode: true,
+    webpack,
+  },
+  SentryWebpackPluginOptions
+);

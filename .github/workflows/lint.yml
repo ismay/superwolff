@@ -7,29 +7,18 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  eslint:
+  lint:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v2
       - uses: c-hive/gha-npm-cache@v1
       - run: npm ci --ignore-scripts
-      - run: npm run lint:eslint
-
-  stylelint:
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    steps:
-      - uses: actions/checkout@v2
-      - uses: c-hive/gha-npm-cache@v1
-      - run: npm ci --ignore-scripts
-      - run: npm run lint:stylelint
-
-  prettier:
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    steps:
-      - uses: actions/checkout@v2
-      - uses: c-hive/gha-npm-cache@v1
-      - run: npm ci --ignore-scripts
-      - run: npm run lint:prettier
+      - uses: wearerequired/lint-action@v1
+        with:
+          eslint: true
+          eslint_args: "--ignore-path .gitignore"
+          prettier: true
+          prettier_args: "--ignore-path .gitignore"
+          stylelint: true
+          stylelint_args: "--ignore-path .gitignore"

@@ -22,3 +22,4 @@ jobs:
           prettier_args: "--ignore-path .gitignore"
           stylelint: true
           stylelint_args: "--ignore-path .gitignore"
+          check_name: Lint

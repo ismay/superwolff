@@ -1,11 +1,10 @@
-import { useRef } from 'react'
+/* eslint-disable react/jsx-props-no-spreading */
+
 import { useDialog } from "@react-aria/dialog";
 import { FocusScope } from "@react-aria/focus";
-import {
-  useModal,
-  useOverlay,
-  usePreventScroll,
-} from "@react-aria/overlays";
+import { useModal, useOverlay, usePreventScroll } from "@react-aria/overlays";
+import T from "prop-types";
+import { useRef } from "react";
 
 export default function Modal(props) {
   const { children, title } = props;
@@ -60,3 +59,8 @@ export default function Modal(props) {
     </div>
   );
 }
+
+Modal.propTypes = {
+  children: T.node.isRequired,
+  title: T.string.isRequired,
+};

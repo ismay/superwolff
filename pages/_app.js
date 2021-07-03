@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types, react/jsx-props-no-spreading, global-require */
 
 import "../styles/globals.css";
+import { OverlayProvider } from "@react-aria/overlays";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { OverlayProvider } from "@react-aria/overlays";
 import Header from "../components/header";
 import LoadingIndicator from "../components/loading-indicator";
 import Main from "../components/main";

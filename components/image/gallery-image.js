@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-props-no-spreading */
+
 import { useButton } from "@react-aria/button";
 import { OverlayContainer } from "@react-aria/overlays";
 import { useOverlayTriggerState } from "@react-stately/overlays";
@@ -21,9 +23,6 @@ export default function GalleryImage({
   const openButtonRef = useRef();
   const closeButtonRef = useRef();
 
-  // useButton ensures that focus management is handled correctly,
-  // across all browsers. Focus is restored to the button once the
-  // dialog closes.
   const { buttonProps: openButtonProps } = useButton(
     {
       onPress: () => state.open(),
@@ -61,13 +60,8 @@ export default function GalleryImage({
             title="Enter your name"
           >
             <form style={{ display: "flex", flexDirection: "column" }}>
-              <label>
-                First Name: <input placeholder="John" />
-              </label>
-              <label>
-                Last Name: <input placeholder="Smith" />
-              </label>
               <button
+                type="button"
                 {...closeButtonProps}
                 ref={closeButtonRef}
                 style={{ marginTop: 10 }}

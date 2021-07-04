@@ -8,7 +8,7 @@ const webpack = (config) => {
     config.devtool = "source-map";
     config.plugins.push(
       new HoneybadgerSourceMapPlugin({
-        apiKey: process.env.HONEYBADGER_API_KEY,
+        apiKey: process.env.NEXT_PUBLIC_HONEYBADGER_API_KEY,
         assetsUrl: `${process.env.VERCEL_URL}/_next`,
         deploy: {
           environment: process.env.VERCEL_ENV,

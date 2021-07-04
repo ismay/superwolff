@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types, react/jsx-props-no-spreading, global-require */
 
 import "../styles/globals.css";
+import Honeybadger from "@honeybadger-io/js";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Header from "../components/header";
@@ -12,7 +13,14 @@ if (process.env.NEXT_PUBLIC_API_MOCKING === "enabled") {
   require("../.msw");
 }
 
-export default function CustomApp({ Component, pageProps }) {
+Honeybadger.configure({
+  apiKey: process.env.NEXT_PUBLIC_HONEYBADGER_API_KEY,
+  environment: process.env.NEXT_PUBLIC_VERCEL_ENV,
+  projectRoot: process.env.NEXT_PUBLIC_VERCEL_URL,
+  revision: process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA,
+});
+
+export default function CustomApp({ Component, err, pageProps }) {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -35,11 +43,12 @@ export default function CustomApp({ Component, pageProps }) {
     };
   });
 
+  // The err prop is a workaround for https://github.com/zeit/next.js/issues/8592
   return (
     <Page>
       <Header />
       <Main>
-        <Component {...pageProps} />
+        <Component {...pageProps} err={err} />
       </Main>
       <LoadingIndicator isLoading={isLoading} />
     </Page>

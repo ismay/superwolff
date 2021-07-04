@@ -16,7 +16,7 @@ if (process.env.NEXT_PUBLIC_API_MOCKING === "enabled") {
 Honeybadger.configure({
   apiKey: process.env.NEXT_PUBLIC_HONEYBADGER_API_KEY,
   environment: process.env.NEXT_PUBLIC_VERCEL_ENV,
-  projectRoot: process.env.NEXT_PUBLIC_VERCEL_URL,
+  projectRoot: "webpack://_N_E/./",
   revision: process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA,
 });
 

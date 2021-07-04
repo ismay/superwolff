@@ -28,6 +28,7 @@ module.exports = {
   images: {
     domains: ["media.graphcms.com"],
   },
+  productionSourceMaps: true,
   reactStrictMode: true,
   webpack,
 };

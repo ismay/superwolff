@@ -7,6 +7,7 @@
 - `API_TOKEN`: the Graphcms token.
 - `API_URL`: the Graphcms url.
 - `NEXT_PUBLIC_API_MOCKING`: set to either `enabled` or `disabled`.
+- `PACKTRACKER_TOKEN`: used for uploading build stats.
 
 ### Used only in workflows
 

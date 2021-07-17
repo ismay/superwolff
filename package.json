@@ -61,11 +61,6 @@
     "stylelint-order": "^4.1.0",
     "wait-on": "^6.0.0"
   },
-  "babel": {
-    "presets": [
-      "next/babel"
-    ]
-  },
   "browserslist": [
     "defaults",
     "not IE 11"

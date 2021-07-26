@@ -32,7 +32,7 @@
     "@percy/cypress": "^3.1.1",
     "@storybook/addon-essentials": "^6.3.5",
     "@storybook/addon-links": "^6.3.5",
-    "@storybook/builder-webpack5": "^6.3.5",
+    "@storybook/builder-webpack5": "^6.3.6",
     "@storybook/manager-webpack5": "^6.3.5",
     "@storybook/react": "^6.3.5",
     "@testing-library/cypress": "^8.0.0",

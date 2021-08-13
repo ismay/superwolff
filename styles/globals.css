@@ -6,7 +6,6 @@
 
   /* Colors */
   --color-black: rgb(10, 10, 10);
-  --color-black-transparent: rgba(10, 10, 10, 0);
   --color-gray: rgb(220, 220, 220);
   --color-white: rgb(250, 250, 250);
 
@@ -62,12 +61,6 @@ h6 {
   font-weight: 400;
 }
 
-/* Inherit text color for links */
-
-a {
-  color: currentColor;
-}
-
 /* Style image alt text */
 
 img {
@@ -78,10 +71,4 @@ img {
   img {
     font-size: 0.75rem;
   }
-}
-
-/* No image link borders by default */
-
-a img {
-  border: 0;
 }

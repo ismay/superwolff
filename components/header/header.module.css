@@ -9,10 +9,18 @@
   padding: 1.5rem 0 0.5rem;
 }
 
+.navigation {
+  margin-top: 1rem;
+}
+
 @media (min-width: 30em) {
   .container {
     flex-direction: row;
     justify-content: space-between;
+  }
+
+  .navigation {
+    margin-top: 0;
   }
 }
 

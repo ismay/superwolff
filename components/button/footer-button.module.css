@@ -1,0 +1,13 @@
+.link {
+  background-color: var(--color-black);
+  border: 2px solid var(--color-black);
+  color: var(--color-white);
+}
+
+.link::before {
+  color: white;
+}
+
+.link:where(:hover, :active, :focus)::before {
+  color: red;
+}

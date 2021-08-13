@@ -1,0 +1,11 @@
+.container {
+  overflow: hidden;
+}
+
+.zoom {
+  transition: transform 300ms;
+}
+
+a:where(:hover, :active, :focus) .zoom {
+  transform: scale(1.1);
+}

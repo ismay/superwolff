@@ -32,6 +32,6 @@
 .link:hover,
 .link:active,
 .link:focus,
-.active {
+.link:global(.active) {
   border-color: var(--color-black);
 }

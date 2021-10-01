@@ -1,32 +1,19 @@
-import c from "classnames";
-import Link from "next/link";
-import { useRouter } from "next/router";
+import ActiveLink from "../active-link";
 import s from "./navigation.module.css";
 
 export default function Navigation() {
-  const { pathname } = useRouter();
-  const isWorkActive = pathname === "/" || pathname.startsWith("/work");
-  const isAboutActive = pathname === "/about";
-
-  const workClass = c(s.link, {
-    [s.active]: isWorkActive,
-  });
-  const aboutClass = c(s.link, {
-    [s.active]: isAboutActive,
-  });
-
   return (
     <nav>
-      <Link href="/">
-        <a className={workClass} title="Work">
+      <ActiveLink activeClassName="active" href="/">
+        <a className={s.link} title="Work">
           Work
         </a>
-      </Link>
-      <Link href="/about">
-        <a className={aboutClass} title="About">
+      </ActiveLink>
+      <ActiveLink activeClassName="active" href="/about">
+        <a className={s.link} title="About">
           About
         </a>
-      </Link>
+      </ActiveLink>
     </nav>
   );
 }
